@@ -17,9 +17,10 @@ mylinks.each do |link|
   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
   request = Net::HTTP::Get.new(uri.request_uri)
   response = http.request(request)
+  time = Time.new
   puts "#{link.href} is #{response.code}"
   unless response.code == '200'
-    File.open('error_log.txt','a+'){|file| file.puts "#{link.href} is #{response.code}" } #add a date timestamp
+    File.open('error_log.txt','a+'){|file| file.puts "#{link.href} is #{response.code} at #{time}" } 
   end
 end
 
